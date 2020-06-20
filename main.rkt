@@ -74,7 +74,8 @@
      [paint-callback
       (λ (canvas dc)
         (define (draw p)
-          (send dc set-pen (site-color (nearest-neighbor p sites)) w 'solid)
-          (send dc draw-point (point-x p) (point-y p)))
+          (send* dc
+            (set-pen (send the-pen-list find-or-create-pen (site-color (nearest-neighbor p sites)) w 'solid))
+            (draw-point (point-x p) (point-y p))))
         (for-each draw plane))])
 (send frame show #t)
