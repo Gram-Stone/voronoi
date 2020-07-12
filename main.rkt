@@ -55,14 +55,11 @@
 
 ;;; RANDOM SITE GENERATOR
 
-;random color generator (eats a natural? argument whose identifier has no bound occurrences in the procedure's body, in order to satisfy the function contract of build-list)
-(define (random-color x)(make-object color% (random 0 256) (random 0 256) (random 0 256)))
-
-;defines a list of random colors with length n
-(define colors (build-list n (λ (x) (random-color x))))
+;random color generator (eats a list whose identifier has no bound occurrences in the procedure's body, in order to satisfy the function contract of map)
+(define (random-colors lst)(make-object color% (random 0 256) (random 0 256) (random 0 256)))
 
 ;defines a list of random sites with length n
-(define sites (map site (random-sample plane n #:replacement? #f) colors))
+(define sites (map site (random-sample plane n #:replacement? #f) (map random-colors (range n))))
 
 ;;;GRAPHICS
 
