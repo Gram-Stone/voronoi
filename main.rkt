@@ -14,6 +14,8 @@
 (define w 2)   ;pen width
 (define n 32)  ;number of sites and colors
 
+(define D 'euclidean) ;distance function ('manhattan for Manhattan distance, 'chebyshev for Chebyshev distance, returns the Euclidean distance on all other values)
+
 ;structs
 (struct point (x y))
 (struct site (pos color))
@@ -50,11 +52,14 @@
 (define (chebyshev-distance a b)(max (abs (dx a b))
                                      (abs (dy a b))))
 
-;distance procedure alias (use it to toggle distance functions)
-(define distance euclidean-distance)
+;distance procedure handler
+(define (distance a b f)((cond [(eq? f 'manhattan) manhattan-distance]
+                               [(eq? f 'chebyshev) chebyshev-distance]
+                               [else euclidean-distance])
+                         a b))
 
 ;nearest neighbor procedure
-(define (nearest-neighbor p lst)(argmin (λ (x) (distance p (site-pos x))) lst))
+(define (nearest-neighbor p lst)(argmin (λ (x) (distance p (site-pos x) D)) lst))
 
 ;;; RANDOM SITE GENERATOR
 
