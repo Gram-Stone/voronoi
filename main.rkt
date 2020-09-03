@@ -53,14 +53,14 @@
                                      (abs (dy a b))))
 
 ;;distance procedure handler
-(define (distance a b f)((case f
+(define (distance f a b)((case f
                            ['manhattan manhattan-distance]
                            ['chebyshev chebyshev-distance]
                            [else euclidean-distance])
                          a b))
 
 ;;nearest neighbor procedure
-(define (nearest-neighbor p lst)(argmin (λ (x) (distance p (site-pos x) D)) lst))
+(define (nearest-neighbor p lst)(argmin (λ (x) (distance D p (site-pos x))) lst))
 
 ;; RANDOM SITE GENERATOR
 
