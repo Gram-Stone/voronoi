@@ -23,10 +23,7 @@
 ;; MATH
 
 ;;custom Cartesian product procedure (only computes binary Cartesian products and outputs a pair? of any/c instead of a list? to slightly abbreviate our definition of the Euclidean plane)
-(define (cartesian-product lst1 lst2)(apply append
-                                            (for/list ([i lst1])
-                                              (for/list ([j lst2])
-                                                (cons i j)))))
+(define (cartesian-product lst1 lst2)(for*/list ([i lst1] [j lst2]) (cons i j)))
 
 ;;Euclidean plane definition
 (define plane (map (λ (x) (point (car x) (cdr x)))
