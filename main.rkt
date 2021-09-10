@@ -65,7 +65,7 @@
 (define (random-color)(make-object color% (random 0 256) (random 0 256) (random 0 256)))
 
 ;;defines a list of random colors with length n
-(define colors (for/list ([i (range n)])
+(define colors (for/list ([i (in-range n)])
                  (random-color)))
 
 ;;defines a list of random points with length n
